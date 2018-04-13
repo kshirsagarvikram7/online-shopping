@@ -13,6 +13,14 @@
 		<springwebmvc.version>4.3.6.RELEASE</springwebmvc.version>
 	</properties>
 	<dependencies>
+		<!-- Link Backend project -->
+		<dependency>
+			<groupId>net.vksagar</groupId>
+			<artifactId>shoppingbackend</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+
 		<!-- Java EE API -->
 		<dependency>
 			<groupId>javax</groupId>
@@ -36,7 +44,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${springwebmvc.version}</version>
 		</dependency>
-		
+
 		<!-- JSTL -->
 		<dependency>
 			<groupId>jstl</groupId>

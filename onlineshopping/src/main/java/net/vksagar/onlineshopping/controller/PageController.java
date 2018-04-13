@@ -1,17 +1,25 @@
 package net.vksagar.onlineshopping.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.vksagar.shoppingbackend.dao.CategoryDAO;
+
 @Controller
 public class PageController {
+	
+	@Autowired
+	private CategoryDAO categoryDAO;
 	
 	@RequestMapping(value= {"/","/home", "/index"})
 	public ModelAndView index() {
 		ModelAndView modelAndView = new ModelAndView("page");
 		modelAndView.addObject("title", "Home");
+		//passig list of categories
+		modelAndView.addObject("categories",categoryDAO.list());
 		modelAndView.addObject("userClickHome", true);
 		return modelAndView;
 	}
