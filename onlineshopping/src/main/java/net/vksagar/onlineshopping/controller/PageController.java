@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.vksagar.shoppingbackend.dao.CategoryDAO;
+import net.vksagar.shoppingbackend.dto.Category;
 
 @Controller
 public class PageController {
@@ -37,6 +38,35 @@ public class PageController {
 		ModelAndView modelAndView = new ModelAndView("page");
 		modelAndView.addObject("title", "Contact Us");
 		modelAndView.addObject("userClickContact", true);
+		return modelAndView;
+	}
+	/*
+	 * Method to load all the products and based on category
+	 */
+	@RequestMapping(value= {"/show/all/products"})
+	public ModelAndView showAllProducts() {
+		ModelAndView modelAndView = new ModelAndView("page");
+		modelAndView.addObject("title", "All Products");
+		//passig list of categories
+		modelAndView.addObject("categories",categoryDAO.list());
+		modelAndView.addObject("userClickAllProducts", true);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value= {"/show/category/{id}/products"})
+	public ModelAndView showCategoryProducts(@PathVariable("id") int id) {
+		ModelAndView modelAndView = new ModelAndView("page");
+		
+		//categoryDAO to fetch single category
+		Category category = null;
+		category = categoryDAO.get(id);
+		modelAndView.addObject("title", category.getName());
+		//passigg list of categories
+		modelAndView.addObject("categories",categoryDAO.list());
+		
+		//passing single category object
+		modelAndView.addObject("category", category);
+		modelAndView.addObject("userClickCategoryProducts", true);
 		return modelAndView;
 	}
 	
